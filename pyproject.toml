@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frs-bridge"
+version = "0.1.0"
+description = "Local-first receive audio bridge from handheld radios to AI-ready events"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = []
+
+[project.optional-dependencies]
+transcribe = ["faster-whisper>=1.1,<2"]
+voiceprint = ["resemblyzer>=0.1.4,<0.2", "numpy>=1.26,<2", "numba>=0.59,<0.62", "setuptools>=68,<81"]
+
+[project.scripts]
+frs-bridge = "frs_bridge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
