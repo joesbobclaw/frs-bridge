@@ -38,6 +38,30 @@ frs-bridge --help
 
 Use `python` instead of `python3.11` where appropriate. Windows activation: `.venv\Scripts\Activate.ps1`. Recording, processing, and the event API have no third-party Python runtime dependencies. Optional ML packages bring substantially more dependencies and disk/RAM use; “lightweight voiceprint” describes the stored embedding, not a dependency-free model runtime.
 
+## Install with Claude Code or Codex
+
+Either agent can perform the software installation from a local terminal. This repo includes [AGENTS.md](AGENTS.md) with the installation/verification procedure and [CLAUDE.md](CLAUDE.md) pointing Claude Code to the same instructions. No AI agent, account, or API key is required to run FRS Bridge itself.
+
+Give your agent this prompt (or open a clone and omit the clone step):
+
+```text
+Install FRS Bridge from https://github.com/joesbobclaw/frs-bridge on this computer.
+Clone it into a new directory, or inspect and reuse an existing clone without
+overwriting local changes. Read README.md and AGENTS.md before proceeding.
+Use a project-local Python 3.11 virtual environment; install FFmpeg if missing
+using the platform's normal package manager. Install the transcribe and
+voiceprint extras for local CPU inference. Do not modify an existing radio
+service, global Python environment, or system startup configuration.
+Run the automated checks, verify the CLI and local event API, and list audio
+inputs. Identify the USB radio input; do not guess or select the built-in mic.
+Give me the exact record command for that input and explain any physical cable
+or OS-permission step I must complete. Do not start unattended recording or
+enroll a person's voice during installation. Report what passed and what still
+needs a real radio test. Do not call a synthetic test hardware validation.
+```
+
+The agent can install packages, run checks, and discover devices. You still need to connect the radio/audio cable and approve any OS audio-input permission. If the input is ambiguous, the agent should identify that gap rather than silently recording a different microphone. Optional model downloads require internet; inference is local afterward. Windows/Linux instructions remain unverified on actual hardware.
+
 ## Connect and record
 
 Use a receive-audio cable appropriate for your radio and an audio interface with a compatible input. A programming cable is usually **not** an audio cable. Speaker-level outputs may require attenuation/isolation; avoid overdriving a microphone input. Disable interface AGC/noise effects if possible. Start at low receiver volume, then calibrate.
